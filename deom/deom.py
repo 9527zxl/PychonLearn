@@ -1,15 +1,21 @@
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 
 
-class key:
-    driver = webdriver.Chrome()
+def driver_object(type_):
+    if type_ == 'Chrome':
+        driver = webdriver.Chrome()
+    elif type_ == 'Firefox':
+        driver = webdriver.Firefox()
+    else:
+        driver = webdriver.Ie()
+    return driver
 
-    def geturl(self, url):
+
+class Key:
+    # driver = webdriver.Chrome()
+
+    def url(self, url):
         return self.driver.get(url)
 
-    def account(self, account):
-        return self.driver.find_element(By.XPATH, '//input[@id="username1"]').send_keys(account)
-
-    def password(self, password):
-        return self.driver.find_element(By.XPATH, '//input[@id="password1"]').send_keys(password)
+    def __init__(self, type_):
+        self.driver = driver_object(type_)
